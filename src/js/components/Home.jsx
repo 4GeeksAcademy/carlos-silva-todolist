@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 
 
@@ -8,34 +8,48 @@ const Home = () => {
 	const [inputValue, setInputValue] = useState("");
 	const [todos, setTodos] = useState([]);
 
+	function handleChange(event) {
+		setInputValue(event.target.value)
+
+	}
+	function addTask(event){
+         if (event.key=="Enter"){
+			setTodos([
+				...todos, inputValue
+			])
+		 }
+	}
+	function deleteTask (id) {
+		const newTodos = todos.filter((item, index) => index != id )
+		setTodos (newTodos)
+	}
 	return (
 		<div className="container">
-			<h1>MY TODOS{inputValue} </h1>
+			<h1>MY TODOS </h1>
 			<ul>
 				<li>
 					<input type="text"
-					onChange={(e) => setInputValue(e.target.value)}
-					value={inputValue}
-					onKeyPress={(e) => {if(e.key === "Enter"){
-						setTodos(todos.concat([inputValue]));
-						setInputValue("");
-					} }}
+						onChange={handleChange}
+						value={inputValue}
+                        onKeyDown={addTask}
 						placeholder="Whats do you need to do?" />
 				</li>
-
-				
-				{
-					todos.map( (t) => {
-						<li> 
-						  {t} <i class="fa-solid fa-trash" onClick={() => setTodos(todos.filter((element, index) => element != t )) }></i>
-							</li>
-
-					}
-
-					)
+                {  
+				  todos.map( (task, index) => (
+					    <li>
+							{task} 
+							<span onClick={() => deleteTask (index) }>
+								<i class="fa-solid fa-trash" ></i>
+							</span> 
+					   </li>
+				  ) )
 				}
+           				
+		
+					
+			
 			</ul>
-           <div>23 tasks</div>
+			<div>23 tasks</div>
 
 		</div >
 	);
