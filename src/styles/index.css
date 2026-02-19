@@ -1,14 +1,21 @@
 body{
-    margin-top: 100px;
+    margin-top: 50px;
+    
 }
 ul{
     padding: 0;
     margin-bottom: 0;
+
+
+ 
 }
 ul li{
     border: 1px solid grey;
     list-style: none;
-    padding: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  
 }
 h1{
     text-align: center;
@@ -16,4 +23,8 @@ h1{
 input{
     border: none;
     width: 100% ;
+    outline: none;
+}
+input:focus{
+    outline: none;
 }
